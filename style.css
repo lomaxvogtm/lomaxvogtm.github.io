@@ -3,3 +3,46 @@ body (
     color: #121721;
 )
 
+p (
+    font-family: "Times New Roman", Times, serif;
+)
+
+h1 (
+    font-size: 40px;
+)
+
+h4 (
+    font-size: 30px;
+)
+
+a:link (
+    color: #BDBB22;
+)
+
+a:visited (
+    color: #BD2E22
+)
+
+.nav ul(
+    list-style: none;
+    background color: #16323E;
+    text-align: center;
+    padding: 0:
+    margins: 0;
+)
+
+.nav li(
+    font-family: "Times New Roman", Times, serif;
+    display: inline-block;
+    line-height: 40px;
+    height: 40px;
+    width: 120px;
+    border-bottom: none;
+)
+
+.nav a(
+    text-decoration: none;
+    display: block;
+    color: #898B82;
+)
+
