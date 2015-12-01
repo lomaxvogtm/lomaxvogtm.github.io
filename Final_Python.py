@@ -57,20 +57,7 @@ class Building:
         self.controller()
 
     def controller(self):
-        self.elevator.draw_elevator()
-        if self.elevator.position == Building.num_floors-1:
-            self.direction = -1
-        elif self.elevator.position == 0:
-            self.direction = 1
-        # Get passengers from current floor
-        self.elevator.position += self.direction
-        x = self.elevator.passengers[self.elevator.position].get()
-        self.elevator.passengers[self.elevator.position].set("")
-        x = x.split(',')
-        print(x)
-        self.root.after(2000, self.controller)
-
-        def move_elevator(self):
+        def pick_up_passengers():
             for passenger in x:
                 try:
                     floor = int(passenger)-1
@@ -80,12 +67,36 @@ class Building:
                         x.remove(passenger)
                     if floor == self.elevator.position:
                         x.remove(passenger)
-                    if self.direction == -1 and floor - self.elevator.position < self.elevator.position:
+                    if self.direction == -1 and floor < self.elevator.position:
                         self.list_pass.append(floor)
-                    if self.direction == 1 and floor - self.elevator.position > self.elevator.position:
+                        x.remove(passenger)
+                    if self.direction == 1 and floor > self.elevator.position:
                         self.list_pass.append(floor)
+                        x.remove(passenger)
                 except ValueError:
-                    pass
+                    x.remove(passenger)
+        def drop_off_passengers():
+            for passenger in self.list_pass:
+                if int(passenger) == self.elevator.position:
+                    self.list_pass.remove(passenger)
+        self.elevator.draw_elevator()
+
+        x = self.elevator.passengers[self.elevator.position].get()
+        x = x.split(',')
+        pick_up_passengers()
+        drop_off_passengers()
+        x= ','.join(x)
+        self.elevator.passengers[self.elevator.position].set(x)
+        print(x, self.list_pass, self.elevator.position)
+
+        if self.elevator.position == Building.num_floors-1:
+            self.direction = -1
+        elif self.elevator.position == 0:
+            self.direction = 1
+        # Get passengers from current floor
+        self.elevator.position += self.direction
+        self.root.after(2000, self.controller)
+
 
 
 root = tk.Tk()
@@ -95,3 +106,4 @@ root.mainloop()
 #cosmetic stuff
 #passengers on elevator list
 #delay/error when picking up passengers
+#
